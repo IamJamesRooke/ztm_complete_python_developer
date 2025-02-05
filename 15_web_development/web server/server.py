@@ -1,11 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 app = Flask(__name__)
 app.config['DEBUG'] = True  # Enable debug mode
 
 @app.route('/')
-def index():
-    print(url_for('static', filename='favicon.ico'))
-    return render_template('index.html')
+@app.route('/<username>/<post_id>')
+def index(username=None, post_id=None):
+    return render_template('index.html', name=username, post_id=post_id)
 
 @app.route('/about')
 def about():
